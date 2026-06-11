@@ -36,7 +36,7 @@ Aplikasi ini dikembangkan sepenuhnya menggunakan kerangka kerja **Flutter** dan 
 1. Pastikan Anda telah menginstal Flutter di perangkat Anda.
 2. Clone repositori ini:
    ```bash
-   git clone [MASUKKAN LINK REPOSITORY GITHUB ANDA DI SINI]
+   git clone https://github.com/camkanman/kuyfit.git
    ```
 3. Arahkan direktori terminal ke dalam *folder* proyek:
    ```bash
