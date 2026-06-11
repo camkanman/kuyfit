@@ -3,7 +3,7 @@
 **KuyFit** adalah aplikasi *fitness tracker* modern yang mengedepankan aspek antarmuka (UI/UX) premium, fungsionalitas intuitif, serta estetika visual. Proyek ini dikerjakan sebagai bagian dari Ujian Tengah Semester (UTS) mata kuliah Mobile Computing (MoC02).
 
 ## 🎨 Tautan Desain Figma
-👉 **[MASUKKAN LINK FIGMA ANDA DI SINI]** 👈
+👉 **https://www.figma.com/design/rWDiwspI7DvavERqVaCStg/MoC02---KuyFit_24120300013?node-id=0-1&t=T6va08rRdWpAckSG-1** 👈
 
 ---
 
@@ -36,11 +36,11 @@ Aplikasi ini dikembangkan sepenuhnya menggunakan kerangka kerja **Flutter** dan 
 1. Pastikan Anda telah menginstal Flutter di perangkat Anda.
 2. Clone repositori ini:
    ```bash
-   git clone [MASUKKAN LINK REPOSITORY GITHUB ANDA DI SINI]
+   git clone https://github.com/camkanman/kuyfit.git
    ```
 3. Arahkan direktori terminal ke dalam *folder* proyek:
    ```bash
-   cd kuyFit
+   cd kuyfit
    ```
 4. Dapatkan seluruh dependensi paket:
    ```bash
