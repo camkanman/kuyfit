@@ -40,7 +40,7 @@ Aplikasi ini dikembangkan sepenuhnya menggunakan kerangka kerja **Flutter** dan 
    ```
 3. Arahkan direktori terminal ke dalam *folder* proyek:
    ```bash
-   cd kuyFit
+   cd kuyfit
    ```
 4. Dapatkan seluruh dependensi paket:
    ```bash
