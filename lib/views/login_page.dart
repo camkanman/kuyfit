@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import '../controllers/auth_controller.dart';
 import 'dashboard_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,7 +13,34 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _obscurePassword = true;
+
+  Future<void> _login() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    final auth = Provider.of<AuthController>(context, listen: false);
+    final success = await auth.login(
+      _emailController.text,
+      _passwordController.text,
+    );
+
+    if (success) {
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const DashboardPage()),
+        );
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Login failed. Please try again.')),
+        );
+      }
+    }
+  }
 
   // Colors based on Tailwind config
   final Color background = const Color(0xFFF8F9FF);
@@ -27,6 +56,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = context.watch<AuthController>().isLoading;
     return Scaffold(
       backgroundColor: background,
       body: SafeArea(
@@ -40,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                   Expanded(
                     flex: 5,
                     child: Container(
-                      color: onSurface.withOpacity(0.03),
+                      color: onSurface.withValues(alpha: 0.03),
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                             Container(
                               padding: const EdgeInsets.all(24),
                               decoration: BoxDecoration(
-                                color: secondary.withOpacity(0.1),
+                                color: secondary.withValues(alpha: 0.1),
                                 shape: BoxShape.circle,
                               ),
                               child: Icon(Icons.fitness_center, size: 80, color: secondary),
@@ -112,16 +142,17 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildLoginCard(BuildContext context) {
+    final isLoading = context.watch<AuthController>().isLoading;
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 448),
       child: Container(
         decoration: BoxDecoration(
           color: surface,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: outlineVariant.withOpacity(0.3)),
+          border: Border.all(color: outlineVariant.withValues(alpha: 0.3)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 24,
               offset: const Offset(0, 4),
             ),
@@ -179,6 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 8),
                     TextFormField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         hintText: 'you@example.com',
                         hintStyle: GoogleFonts.plusJakartaSans(
@@ -253,6 +285,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 8),
                     TextFormField(
+                      controller: _passwordController,
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
                         hintText: '••••••••',
@@ -308,14 +341,7 @@ class _LoginPageState extends State<LoginPage> {
 
                     // Login Button
                     ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const DashboardPage()),
-                          );
-                        }
-                      },
+                      onPressed: isLoading ? null : _login,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: secondary,
                         foregroundColor: onSecondary,
@@ -325,20 +351,29 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         elevation: 0,
                       ),
-                      child: Text(
-                        'Login',
-                        style: GoogleFonts.plusJakartaSans(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      child: isLoading
+                          ? const SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              ),
+                            )
+                          : Text(
+                              'Login',
+                              style: GoogleFonts.plusJakartaSans(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                     ),
                     const SizedBox(height: 32),
 
                     // Divider
                     Row(
                       children: [
-                        Expanded(child: Divider(color: outlineVariant.withOpacity(0.5))),
+                        Expanded(child: Divider(color: outlineVariant.withValues(alpha: 0.5))),
                         Flexible(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -354,7 +389,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        Expanded(child: Divider(color: outlineVariant.withOpacity(0.5))),
+                        Expanded(child: Divider(color: outlineVariant.withValues(alpha: 0.5))),
                       ],
                     ),
                     const SizedBox(height: 32),

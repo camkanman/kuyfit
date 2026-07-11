@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:ui';
 import 'dashboard_page.dart';
+import 'workout_page.dart';
 
 class NutritionPage extends StatefulWidget {
   const NutritionPage({super.key});
@@ -35,7 +36,7 @@ class _NutritionPageState extends State<NutritionPage> {
       backgroundColor: background,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: surface.withOpacity(0.8),
+        backgroundColor: surface.withValues(alpha: 0.8),
         elevation: 0,
         scrolledUnderElevation: 0,
         flexibleSpace: ClipRect(
@@ -130,7 +131,7 @@ class _NutritionPageState extends State<NutritionPage> {
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
+                              color: Colors.black.withValues(alpha: 0.05),
                               blurRadius: 10,
                               offset: const Offset(0, 4),
                             ),
@@ -142,7 +143,7 @@ class _NutritionPageState extends State<NutritionPage> {
                             Positioned(
                               right: -8,
                               top: -8,
-                              child: Icon(Icons.local_fire_department, color: primary.withOpacity(0.2), size: 64),
+                              child: Icon(Icons.local_fire_department, color: primary.withValues(alpha: 0.2), size: 64),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,7 +216,7 @@ class _NutritionPageState extends State<NutritionPage> {
                                       borderRadius: BorderRadius.circular(9999),
                                       child: LinearProgressIndicator(
                                         value: 0.48,
-                                        backgroundColor: primary.withOpacity(0.1),
+                                        backgroundColor: primary.withValues(alpha: 0.1),
                                         color: secondary,
                                         minHeight: 8,
                                       ),
@@ -241,7 +242,7 @@ class _NutritionPageState extends State<NutritionPage> {
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
+                              color: Colors.black.withValues(alpha: 0.05),
                               blurRadius: 10,
                               offset: const Offset(0, 4),
                             ),
@@ -299,7 +300,7 @@ class _NutritionPageState extends State<NutritionPage> {
                               borderRadius: BorderRadius.circular(9999),
                               child: LinearProgressIndicator(
                                 value: 0.56,
-                                backgroundColor: primary.withOpacity(0.1),
+                                backgroundColor: primary.withValues(alpha: 0.1),
                                 color: onTertiaryContainer,
                                 minHeight: 6,
                               ),
@@ -319,7 +320,7 @@ class _NutritionPageState extends State<NutritionPage> {
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
+                              color: Colors.black.withValues(alpha: 0.05),
                               blurRadius: 10,
                               offset: const Offset(0, 4),
                             ),
@@ -377,7 +378,7 @@ class _NutritionPageState extends State<NutritionPage> {
                               borderRadius: BorderRadius.circular(9999),
                               child: LinearProgressIndicator(
                                 value: 0.60,
-                                backgroundColor: primary.withOpacity(0.1),
+                                backgroundColor: primary.withValues(alpha: 0.1),
                                 color: secondary,
                                 minHeight: 6,
                               ),
@@ -401,7 +402,7 @@ class _NutritionPageState extends State<NutritionPage> {
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.05),
+                        color: Colors.black.withValues(alpha: 0.05),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -581,7 +582,7 @@ class _NutritionPageState extends State<NutritionPage> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
+                        color: Colors.black.withValues(alpha: 0.1),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -592,8 +593,8 @@ class _NutritionPageState extends State<NutritionPage> {
                       borderRadius: BorderRadius.circular(12),
                       gradient: LinearGradient(
                         colors: [
-                          onTertiaryContainer.withOpacity(0.8),
-                          secondary.withOpacity(0.8),
+                          onTertiaryContainer.withValues(alpha: 0.8),
+                          secondary.withValues(alpha: 0.8),
                         ],
                       ),
                       backgroundBlendMode: BlendMode.multiply,
@@ -606,9 +607,9 @@ class _NutritionPageState extends State<NutritionPage> {
                           child: Container(
                             padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.7),
+                              color: Colors.white.withValues(alpha: 0.7),
                               borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.white.withOpacity(0.5)),
+                              border: Border.all(color: Colors.white.withValues(alpha: 0.5)),
                             ),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -642,7 +643,7 @@ class _NutritionPageState extends State<NutritionPage> {
                                         style: GoogleFonts.plusJakartaSans(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
-                                          color: tertiary.withOpacity(0.9),
+                                          color: tertiary.withValues(alpha: 0.9),
                                         ),
                                       ),
                                     ],
@@ -663,10 +664,10 @@ class _NutritionPageState extends State<NutritionPage> {
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: surface.withOpacity(0.8),
+          color: surface.withValues(alpha: 0.8),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, -4),
             ),
@@ -694,7 +695,15 @@ class _NutritionPageState extends State<NutritionPage> {
                   Navigator.pushReplacement(
                     context,
                     PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => const DashboardPage(),
+                      pageBuilder: (_, _, _) => const DashboardPage(),
+                      transitionDuration: Duration.zero,
+                    ),
+                  );
+                } else if (index == 2) {
+                  Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (_, _, _) => const WorkoutPage(),
                       transitionDuration: Duration.zero,
                     ),
                   );
@@ -735,7 +744,7 @@ class _NutritionPageState extends State<NutritionPage> {
         boxShadow: filled
             ? [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: 6,
                   offset: const Offset(0, 2),
                 )
@@ -749,7 +758,7 @@ class _NutritionPageState extends State<NutritionPage> {
           : Stack(
               children: [
                 Center(
-                  child: Icon(Icons.local_drink, color: outlineVariant.withOpacity(0.5), size: 24),
+                  child: Icon(Icons.local_drink, color: outlineVariant.withValues(alpha: 0.5), size: 24),
                 ),
                 Positioned(
                   top: 6,
@@ -784,7 +793,7 @@ class _NutritionPageState extends State<NutritionPage> {
         border: Border(left: BorderSide(color: iconColor, width: 4)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -860,7 +869,7 @@ class _NutritionPageState extends State<NutritionPage> {
           Container(
             padding: const EdgeInsets.only(top: 8),
             decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: outlineVariant.withOpacity(0.3))),
+              border: Border(top: BorderSide(color: outlineVariant.withValues(alpha: 0.3))),
             ),
             child: Text(
               description,
