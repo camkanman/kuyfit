@@ -24,11 +24,18 @@ Aplikasi ini dikembangkan sepenuhnya menggunakan kerangka kerja **Flutter** dan 
 
 ## 📸 Screenshots (Tangkapan Layar)
 
-*(TODO: Tambahkan file gambar screenshot di direktori root dan sesuaikan tautan di bawah ini)*
-- **Halaman Login:** `![Login](login_screenshot.png)`
-- **Halaman Dashboard/Home:** `![Dashboard](dashboard_screenshot.png)`
-- **Halaman API (Workout):** `![Workout API](workout_api_screenshot.png)`
-- **Fitur Notifikasi:** `![Notification](notification_screenshot.png)`
+- **Halaman Login:** 
+  ![Login](login_screenshot.png)
+
+- **Halaman Dashboard/Home:** 
+  ![Dashboard](dashboard_screenshot.png)
+
+- **Halaman API (Workout):** 
+  ![Workout API](workout_api_screenshot.png)
+
+- **Fitur Notifikasi:** 
+  *(Gambar belum tersedia. Silakan unggah `notification_screenshot.png` ke direktori proyek Anda agar tampil di sini)*
+  ![Notification](notification_screenshot.png)
 
 ---
 
