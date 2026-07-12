@@ -7,6 +7,7 @@ import 'focus_workout_page.dart';
 
 import 'package:provider/provider.dart';
 import '../controllers/workout_controller.dart';
+import '../models/exercise_model.dart';
 import '../services/notification_service.dart';
 
 class WorkoutPage extends StatefulWidget {
@@ -863,7 +864,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
     );
   }
 
-  Widget _buildSearchResults(List<dynamic> exercises) {
+  Widget _buildSearchResults(List<ExerciseModel> exercises) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -919,7 +920,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
     );
   }
 
-  Widget _buildExerciseCard(dynamic exercise) {
+  Widget _buildExerciseCard(ExerciseModel exercise) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
@@ -937,11 +938,11 @@ class _WorkoutPageState extends State<WorkoutPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (exercise['imageUrl'] != null) ...[
+          if (exercise.imageUrl != null) ...[
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                exercise['imageUrl'],
+                exercise.imageUrl!,
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -955,7 +956,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
             children: [
               Expanded(
                 child: Text(
-                  exercise['name'] ?? 'Unknown',
+                  exercise.name,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
@@ -970,7 +971,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  (exercise['difficulty'] ?? 'Unknown').toUpperCase(),
+                  exercise.difficulty.toUpperCase(),
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
@@ -990,7 +991,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  exercise['muscle'] ?? 'Unknown',
+                  exercise.muscle,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -1006,7 +1007,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  exercise['type'] ?? 'Unknown',
+                  exercise.type,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -1017,7 +1018,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
             ],
           ),
 
-          if (exercise['safety_info'] != null && exercise['safety_info'].toString().isNotEmpty) ...[
+          if (exercise.safetyInfo != null && exercise.safetyInfo!.isNotEmpty) ...[
             const SizedBox(height: 12),
             Text(
               'Safety Info',
@@ -1029,14 +1030,14 @@ class _WorkoutPageState extends State<WorkoutPage> {
             ),
             const SizedBox(height: 4),
             Text(
-              exercise['safety_info'],
+              exercise.safetyInfo!,
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 14,
                 color: onSurfaceVariant,
               ),
             ),
           ],
-          if (exercise['equipments'] != null || exercise['equipment'] != null) ...[
+          if (exercise.equipments != null || exercise.equipment != null) ...[
             const SizedBox(height: 12),
             Text(
               'Equipment',
@@ -1051,7 +1052,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
               spacing: 8,
               runSpacing: 4,
               children: () {
-                final eqData = exercise['equipments'] ?? exercise['equipment'];
+                final eqData = exercise.equipments ?? exercise.equipment;
                 List<String> eqList = [];
                 if (eqData is List) {
                   eqList = eqData.map((e) => e.toString()).toList();

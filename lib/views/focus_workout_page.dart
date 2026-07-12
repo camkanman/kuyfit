@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:provider/provider.dart';
 import '../controllers/workout_controller.dart';
+import '../models/exercise_model.dart';
 
 class FocusWorkoutPage extends StatefulWidget {
   final String title;
@@ -23,7 +24,7 @@ class FocusWorkoutPage extends StatefulWidget {
 }
 
 class _FocusWorkoutPageState extends State<FocusWorkoutPage> {
-  List<dynamic> _exercises = [];
+  List<ExerciseModel> _exercises = [];
   bool _isLoading = true;
 
   // Colors based on Tailwind config
@@ -388,7 +389,7 @@ class _FocusWorkoutPageState extends State<FocusWorkoutPage> {
     );
   }
 
-  Widget _buildExerciseCard(dynamic exercise) {
+  Widget _buildExerciseCard(ExerciseModel exercise) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
@@ -414,14 +415,14 @@ class _FocusWorkoutPageState extends State<FocusWorkoutPage> {
             decoration: BoxDecoration(
               color: surfaceContainerLow,
               borderRadius: BorderRadius.circular(8),
-              image: exercise['imageUrl'] != null
+              image: exercise.imageUrl != null
                   ? DecorationImage(
-                      image: NetworkImage(exercise['imageUrl']),
+                      image: NetworkImage(exercise.imageUrl!),
                       fit: BoxFit.cover,
                     )
                   : null,
             ),
-            child: exercise['imageUrl'] == null
+            child: exercise.imageUrl == null
                 ? Icon(Icons.fitness_center, color: outline.withOpacity(0.4))
                 : null,
           ),
@@ -431,7 +432,7 @@ class _FocusWorkoutPageState extends State<FocusWorkoutPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  exercise['name'] ?? 'Unknown',
+                  exercise.name,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
@@ -441,15 +442,15 @@ class _FocusWorkoutPageState extends State<FocusWorkoutPage> {
                 const SizedBox(height: 2),
                 Row(
                   children: [
-                    if (exercise['time'] != null || exercise['reps'] != null) ...[
+                    if (exercise.time != null || exercise.reps != null) ...[
                       Icon(
-                        exercise['time'] != null ? Icons.timer : Icons.repeat,
+                        exercise.time != null ? Icons.timer : Icons.repeat,
                         size: 14,
                         color: onSurfaceVariant,
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        exercise['time'] ?? exercise['reps'] ?? '',
+                        exercise.time ?? exercise.reps ?? '',
                         style: GoogleFonts.plusJakartaSans(
                           fontSize: 11,
                           fontWeight: FontWeight.w500,
@@ -468,7 +469,7 @@ class _FocusWorkoutPageState extends State<FocusWorkoutPage> {
                       const SizedBox(width: 6),
                     ],
                     Text(
-                      (exercise['difficulty'] ?? 'Beginner').toString().capitalize(),
+                      exercise.difficulty.capitalize(),
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: 11,
                         fontWeight: FontWeight.w500,

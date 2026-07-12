@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import '../models/exercise_model.dart';
 
 class WorkoutController extends ChangeNotifier {
-  List<dynamic> _exercises = [];
+  List<ExerciseModel> _exercises = [];
   bool _isLoading = false;
 
-  List<dynamic> get exercises => _exercises;
+  List<ExerciseModel> get exercises => _exercises;
   bool get isLoading => _isLoading;
 
   Future<void> fetchExercises(String query) async {
@@ -29,20 +30,7 @@ class WorkoutController extends ChangeNotifier {
           final name = (ex['name'] ?? '').toString().toLowerCase();
           return name.contains(query.toLowerCase());
         }).take(15).map((ex) {
-          return {
-            'name': ex['name'],
-            'difficulty': ex['level'],
-            'muscle': (ex['primaryMuscles'] != null && (ex['primaryMuscles'] as List).isNotEmpty) 
-                ? ex['primaryMuscles'][0] 
-                : 'Unknown',
-            'type': ex['category'],
-            'safety_info': ex['safety_info'],
-            'equipment': ex['equipment'],
-            'equipments': ex['equipments'],
-            'imageUrl': (ex['images'] != null && (ex['images'] as List).isNotEmpty)
-                ? 'https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${ex['images'][0]}'
-                : null,
-          };
+          return ExerciseModel.fromJson(ex);
         }).toList();
       } else {
         _exercises = [];
@@ -55,7 +43,7 @@ class WorkoutController extends ChangeNotifier {
     }
   }
 
-  Future<List<dynamic>> fetchExercisesByMuscle(String targetMuscle) async {
+  Future<List<ExerciseModel>> fetchExercisesByMuscle(String targetMuscle) async {
     final url = Uri.parse('https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/dist/exercises.json');
     try {
       final response = await http.get(url);
@@ -69,19 +57,7 @@ class WorkoutController extends ChangeNotifier {
         }).take(20).map((ex) {
           final isTimeBased = (ex['category'] == 'stretching' || ex['category'] == 'cardio');
           
-          return {
-            'name': ex['name'],
-            'difficulty': ex['level'],
-            'muscle': (ex['primaryMuscles'] != null && (ex['primaryMuscles'] as List).isNotEmpty) 
-                ? ex['primaryMuscles'][0] 
-                : 'Unknown',
-            'type': ex['category'],
-            'reps': isTimeBased ? null : '3 sets x 12 reps',
-            'time': isTimeBased ? '30 seconds' : null,
-            'imageUrl': (ex['images'] != null && (ex['images'] as List).isNotEmpty)
-                ? 'https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${ex['images'][0]}'
-                : null,
-          };
+          return ExerciseModel.fromJson(ex, isTimeBased: isTimeBased);
         }).toList();
       }
     } catch (e) {
